@@ -129,17 +129,15 @@ No real money or cryptocurrency is held here.
     const { data, error } = await client.auth.getSession();
 
     if (error || !data.session) {
-  window.location.replace("index.html");
+  status.textContent = "Please sign in first.";
+  const link = document.createElement("a");
+  link.href = "index.html";
+  link.textContent = "Go to Login";
+  link.style.color = "#e6bd43";
+  status.appendChild(document.createElement("br"));
+  status.appendChild(link);
   return;
-      }
-      const link = document.createElement("a");
-      link.href = "index.html";
-      link.textContent = "Go to Login";
-      link.style.color = "#e6bd43";
-      status.appendChild(document.createElement("br"));
-      status.appendChild(link);
-      return;
-    }
+}
 
     const user = data.session.user;
     const name = user.user_metadata?.display_name;
