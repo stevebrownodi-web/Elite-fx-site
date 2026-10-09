@@ -1145,6 +1145,15 @@ style="background:#080a0f;color:white;padding:25px 15px;font-family:Arial,sans-s
       placeholder="you@example.com"
       style="display:block;box-sizing:border-box;width:100%;padding:13px;margin:8px 0 18px;background:#080a0f;color:white;border:1px solid #444;border-radius:7px;">
 
+    <label for="elite-auth-name">Display Name</label>
+
+<input
+  id="elite-auth-name"
+  type="text"
+  autocomplete="name"
+  required
+  placeholder="Enter your name"
+  style="display:block;box-sizing:border-box;width:100%;padding:13px;margin:8px 0 18px;background:#080a0f;color:white;border:1px solid #444;border-radius:7px;">
     <label for="elite-auth-password">Password</label>
 
     <input
@@ -1203,10 +1212,10 @@ style="background:#080a0f;color:white;padding:25px 15px;font-family:Arial,sans-s
   const SUPABASE_URL = "https://cornznsfwothkkquqcyz.supabase.co";
   const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_n_hSo4H-Kjt-nvUXJHxNdA_unZGSoSZ";
 
-  const status = document.getElementById("elite-auth-status");
+   status = document.getElementById("elite-auth-status");
   const emailInput = document.getElementById("elite-auth-email");
   const passwordInput = document.getElementById("elite-auth-password");
-  const signedInPanel = document.getElementById("elite-signed-in-panel");
+  const signedInPanconstel = document.getElementById("elite-signed-in-panel");
   const signedInEmail = document.getElementById("elite-signed-in-email");
   const signupButton = document.getElementById("elite-signup-button");
   const loginButton = document.getElementById("elite-login-button");
