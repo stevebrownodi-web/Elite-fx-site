@@ -959,5 +959,169 @@ loadCryptoPrices();
   </div>
 </section>
 <!-- END ELITE FX MULTI-CRYPTO CHARTS -->
+<!-- ELITE FX INTERACTIVE DEMO PORTFOLIO -->
+<section id="elite-interactive-portfolio"
+style="background:#080a0f;color:white;padding:25px 15px;font-family:Arial,sans-serif;">
+
+  <div style="max-width:900px;margin:auto;">
+
+    <div style="background:#12151d;border:1px solid #c9a227;border-radius:15px;padding:20px;">
+
+      <p style="color:#e6bd45;letter-spacing:2px;font-size:12px;">
+        ELITE FX
+      </p>
+
+      <h2 style="margin-top:5px;">Interactive Demo Portfolio</h2>
+
+      <p style="color:#aaa;font-size:13px;">
+        Edit the example holdings below to see how the demo portfolio total changes.
+        No real funds are involved.
+      </p>
+
+      <div style="background:#1b202b;padding:20px;border-radius:10px;margin:20px 0;">
+
+        <p style="color:#bbb;margin-bottom:8px;">Total Demo Portfolio Value</p>
+
+        <h1 id="elite-demo-total" style="color:#e6bd45;font-size:32px;margin:0;">
+          $1,000.00
+        </h1>
+
+        <p style="font-size:11px;color:#999;">
+          Calculated from the example asset values below.
+        </p>
+
+      </div>
+
+      <h3 style="color:#e6bd45;">My Demo Assets</h3>
+
+      <div style="margin-bottom:18px;">
+        <label for="elite-btc-value">Bitcoin (BTC) — Example value in USD</label>
+
+        <input
+          id="elite-btc-value"
+          type="number"
+          min="0"
+          max="100000000"
+          step="0.01"
+          value="500"
+          inputmode="decimal"
+          style="display:block;box-sizing:border-box;width:100%;padding:13px;margin-top:8px;background:#080a0f;color:white;border:1px solid #444;border-radius:7px;">
+      </div>
+
+      <div style="margin-bottom:18px;">
+        <label for="elite-eth-value">Ethereum (ETH) — Example value in USD</label>
+
+        <input
+          id="elite-eth-value"
+          type="number"
+          min="0"
+          max="100000000"
+          step="0.01"
+          value="300"
+          inputmode="decimal"
+          style="display:block;box-sizing:border-box;width:100%;padding:13px;margin-top:8px;background:#080a0f;color:white;border:1px solid #444;border-radius:7px;">
+      </div>
+
+      <div style="margin-bottom:18px;">
+        <label for="elite-usdt-value">Tether (USDT) — Example value in USD</label>
+
+        <input
+          id="elite-usdt-value"
+          type="number"
+          min="0"
+          max="100000000"
+          step="0.01"
+          value="200"
+          inputmode="decimal"
+          style="display:block;box-sizing:border-box;width:100%;padding:13px;margin-top:8px;background:#080a0f;color:white;border:1px solid #444;border-radius:7px;">
+      </div>
+
+      <button
+        type="button"
+        id="elite-calculate-portfolio"
+        style="width:100%;padding:14px;background:#e6bd45;color:#111;font-weight:bold;border:0;border-radius:7px;font-size:15px;">
+        Calculate Demo Portfolio
+      </button>
+
+      <p id="elite-portfolio-message" role="status"
+      style="color:#e6bd45;font-size:13px;margin-top:15px;"></p>
+
+      <div style="border-top:1px solid #333;margin-top:22px;padding-top:15px;">
+        <h3>Portfolio Summary</h3>
+
+        <p>Bitcoin: <strong id="elite-btc-summary">$500.00</strong></p>
+
+        <p>Ethereum: <strong id="elite-eth-summary">$300.00</strong></p>
+
+        <p>Tether: <strong id="elite-usdt-summary">$200.00</strong></p>
+
+        <p style="font-size:11px;color:#999;">
+          These example values are not live prices and do not represent real holdings.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function () {
+  const btc = document.getElementById('elite-btc-value');
+  const eth = document.getElementById('elite-eth-value');
+  const usdt = document.getElementById('elite-usdt-value');
+  const total = document.getElementById('elite-demo-total');
+  const message = document.getElementById('elite-portfolio-message');
+
+  function money(value) {
+    return '$' + value.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  }
+
+  function calculateDemoPortfolio() {
+    const fields = [btc, eth, usdt];
+
+    for (const field of fields) {
+      const value = Number(field.value);
+
+      if (
+        field.value.trim() === '' ||
+        !Number.isFinite(value) ||
+        value < 0 ||
+        value > 100000000
+      ) {
+        message.textContent =
+          'Enter a valid example value between 0 and 100,000,000 for every asset.';
+        return;
+      }
+    }
+
+    const btcValue = Number(btc.value);
+    const ethValue = Number(eth.value);
+    const usdtValue = Number(usdt.value);
+
+    total.textContent = money(btcValue + ethValue + usdtValue);
+
+    document.getElementById('elite-btc-summary').textContent =
+      money(btcValue);
+
+    document.getElementById('elite-eth-summary').textContent =
+      money(ethValue);
+
+    document.getElementById('elite-usdt-summary').textContent =
+      money(usdtValue);
+
+    message.textContent =
+      'Demo portfolio updated successfully. No real funds are involved.';
+  }
+
+  document
+    .getElementById('elite-calculate-portfolio')
+    .addEventListener('click', calculateDemoPortfolio);
+})();
+</script>
+<!-- END ELITE FX INTERACTIVE DEMO PORTFOLIO -->
 </body>
       </html>
