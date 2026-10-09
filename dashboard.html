@@ -93,9 +93,16 @@ No real money or cryptocurrency is held here.
     "sb_publishable_n_hSo4H-Kjt-nvUXJHxNdA_unZGSoSZ";
 
   const client = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY,
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true
+    }
+  }
+);
 
   const main = document.querySelector("main");
   const account = document.createElement("section");
