@@ -1,63 +1,437 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#07111f" />
-  <meta name="description" content="ELITE FX — Explore crypto markets, learn about staking, and track a simulated portfolio in a modern demo dashboard." />
-  <title>ELITE FX — Crypto, Made Clear</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ELITE FX | Digital Asset Platform</title>
+
+  <meta name="description"
+        content="Explore digital assets with ELITE FX. Learn about cryptocurrency markets, digital asset strategies, and investment risks.">
+
+  <style>
+    :root {
+      --gold: #f5c451;
+      --gold-light: #ffe6a0;
+      --bg: #080a0f;
+      --card: #121620;
+      --text: #f6f7fb;
+      --muted: #a4adbd;
+      --border: #292f3b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: #0b0d13;
+    }
+
+    nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 15px 0;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: var(--gold);
+    }
+
+    .logo span {
+      color: white;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .hero {
+      padding: 85px 0 75px;
+      background:
+        radial-gradient(ellipse at top right,
+        #342713 0%, #11121a 35%, #080a0f 75%);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 7px 13px;
+      border: 1px solid #665225;
+      border-radius: 30px;
+      color: var(--gold-light);
+      background: #19150d;
+      font-size: 12px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      max-width: 760px;
+      font-size: clamp(36px, 7vw, 66px);
+      line-height: 1.12;
+      margin-bottom: 23px;
+      letter-spacing: -1.5px;
+    }
+
+    h1 span {
+      color: var(--gold);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 620px;
+      font-size: 17px;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 23px;
+      border-radius: 7px;
+      font-weight: bold;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #17120a;
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-light);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: white;
+    }
+
+    section {
+      padding: 65px 0;
+    }
+
+    .section-title {
+      font-size: clamp(25px, 4vw, 36px);
+      margin-bottom: 12px;
+    }
+
+    .section-description {
+      color: var(--muted);
+      max-width: 650px;
+      margin-bottom: 32px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 24px;
+    }
+
+    .card-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .market {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: #0d1017;
+    }
+
+    .market-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 17px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .coin-name {
+      font-weight: bold;
+    }
+
+    .coin-symbol {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .market-note {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 20px;
+    }
+
+    .notice {
+      border: 1px solid #665225;
+      background: #17140e;
+      padding: 22px;
+      border-radius: 10px;
+    }
+
+    .notice h3 {
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .notice p {
+      color: #d1d3da;
+      font-size: 14px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 60px 0;
+      }
+
+      .nav-links {
+        gap: 13px;
+      }
+
+      .market-row {
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
-  <header class="topbar">
-    <a class="brand" href="#home" aria-label="ELITE FX home"><span class="brand-mark">E</span><span>ELITE <b>FX</b><small>CRYPTO PLATFORM</small></span></a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
-    <nav id="mainNav"><a class="nav-link active" href="#home">Overview</a><a class="nav-link" href="#markets">Markets</a><a class="nav-link" href="#staking">Staking</a><a class="nav-link" href="#how-it-works">How it works</a></nav>
-    <a class="button button-outline header-cta" href="#dashboard">Open demo <span>↗</span></a>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a class="logo" href="#home">ELITE <span>FX</span></a>
+
+        <div class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#markets">Markets</a>
+          <a href="#features">Features</a>
+          <a href="#about">About</a>
+        </div>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section class="hero section-wrap" id="home">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="pulse-dot"></span> THE CRYPTO EXPERIENCE, REIMAGINED</div>
-        <h1>Make your next<br>move <span>count.</span></h1>
-        <p class="hero-lead">Explore digital assets, learn how staking works, and get comfortable with a crypto portfolio — all in a clear, beginner-friendly demo.</p>
-        <div class="hero-actions"><a class="button button-primary" href="#dashboard">Explore the demo <span>↗</span></a><a class="text-link" href="#how-it-works">How it works <span>→</span></a></div>
-        <div class="hero-proof"><div class="avatar-stack"><span>₿</span><span>Ξ</span><span>◎</span></div><div><strong>Learn before you leap</strong><small>Practice with simulated balances</small></div></div>
-      </div>
-      <div class="hero-visual" aria-label="Illustration of a simulated crypto portfolio">
-        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="coin coin-btc">₿</div><div class="coin coin-eth">◆</div><div class="coin coin-sol">◎</div>
-        <div class="float-card card-top"><span class="mini-label">DEMO PORTFOLIO</span><strong>₦2,450,000</strong><span class="gain">+4.8% <small>simulated</small></span></div>
-        <div class="chart-card"><div class="chart-head"><span>Portfolio performance</span><span class="chart-period">7D ▾</span></div><div class="chart-value">+₦112,400 <span>↗</span></div><svg class="hero-chart" viewBox="0 0 420 140" role="img" aria-label="Illustrative rising portfolio line"><defs><linearGradient id="chartFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#20e6a4" stop-opacity=".3"/><stop offset="1" stop-color="#20e6a4" stop-opacity="0"/></linearGradient></defs><path d="M0 112 C22 105 24 83 47 91 S81 115 103 77 S137 88 157 68 S188 83 210 52 S244 71 264 45 S300 61 321 28 S357 47 376 18 S402 28 420 7 L420 140 L0 140Z" fill="url(#chartFill)"/><path d="M0 112 C22 105 24 83 47 91 S81 115 103 77 S137 88 157 68 S188 83 210 52 S244 71 264 45 S300 61 321 28 S357 47 376 18 S402 28 420 7" fill="none" stroke="#20e6a4" stroke-width="3" stroke-linecap="round"/></svg><div class="chart-labels"><span>OCT 02</span><span>OCT 05</span><span>OCT 09</span></div></div>
-        <div class="float-card card-bottom"><span class="mini-icon">✦</span><div><strong>Learn. Simulate. Grow.</strong><small>No real funds involved</small></div></div>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="badge">DIGITAL ASSETS • MARKET EDUCATION</div>
+
+        <h1>
+          Explore the future of
+          <span>digital finance.</span>
+        </h1>
+
+        <p>
+          Welcome to ELITE FX. Explore cryptocurrency markets,
+          understand digital assets, and learn about responsible
+          approaches to investing in a changing financial world.
+        </p>
+
+        <div class="buttons">
+          <a class="btn btn-gold" href="#markets">
+            Explore Markets
+          </a>
+
+          <a class="btn btn-outline" href="#about">
+            Learn More
+          </a>
+        </div>
       </div>
     </section>
 
-    <section class="ticker" aria-label="Illustrative crypto assets"><div class="ticker-inner"><span class="ticker-label">EXPLORE ASSETS</span><div class="ticker-item"><i class="btc">₿</i><span>Bitcoin <small>BTC</small></span><b>Market data demo</b></div><div class="ticker-item"><i class="eth">◆</i><span>Ethereum <small>ETH</small></span><b>Market data demo</b></div><div class="ticker-item"><i class="sol">◎</i><span>Solana <small>SOL</small></span><b>Market data demo</b></div><div class="ticker-item"><i class="ada">A</i><span>Cardano <small>ADA</small></span><b>Market data demo</b></div></div></section>
+    <section id="features">
+      <div class="container">
+        <h2 class="section-title">A smarter way to explore crypto</h2>
 
-    <section class="section-wrap dashboard-section" id="dashboard">
-      <div class="section-heading"><div><div class="eyebrow">YOUR SPACE TO PRACTICE</div><h2>Welcome to your <span>demo dashboard.</span></h2><p>Try the experience using virtual funds. Nothing here is a real investment account.</p></div><div class="demo-badge"><span class="pulse-dot"></span> DEMO MODE</div></div>
-      <div class="dashboard-grid">
-        <article class="panel balance-panel"><div class="panel-top"><span class="panel-label">TOTAL DEMO BALANCE</span><span class="more">•••</span></div><div class="balance-amount" id="balanceAmount">₦2,450,000<span>.00</span></div><div class="balance-change"><span>↗ +4.8%</span> <small>illustrative change</small></div><div class="balance-divider"></div><div class="balance-bottom"><div><small>Virtual assets</small><strong id="assetCount">4 assets</strong></div><button class="button button-primary button-small" id="resetDemo">Reset demo ↻</button></div></article>
-        <article class="panel allocation-panel"><div class="panel-top"><span class="panel-label">PORTFOLIO ALLOCATION</span><span class="panel-subtle">Illustrative</span></div><div class="allocation-content"><div class="donut"><div class="donut-center"><strong>100%</strong><small>virtual</small></div></div><div class="allocation-legend"><div><i class="legend-btc"></i><span>Bitcoin</span><b>42%</b></div><div><i class="legend-eth"></i><span>Ethereum</span><b>28%</b></div><div><i class="legend-sol"></i><span>Solana</span><b>18%</b></div><div><i class="legend-other"></i><span>Other</span><b>12%</b></div></div></div></article>
+        <p class="section-description">
+          Learn the basics, understand the risks, and explore
+          digital asset opportunities before making financial decisions.
+        </p>
+
+        <div class="grid">
+          <article class="card">
+            <div class="card-icon">₿</div>
+            <h3>Digital Assets</h3>
+            <p>
+              Discover cryptocurrencies and learn how digital
+              asset markets work.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">📊</div>
+            <h3>Market Insights</h3>
+            <p>
+              Explore market information and learn about price
+              movements, volatility, and risk.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🔐</div>
+            <h3>Security Awareness</h3>
+            <p>
+              Understand wallet security, private keys,
+              scams, and responsible asset management.
+            </p>
+          </article>
+        </div>
       </div>
-      <article class="panel assets-panel" id="markets"><div class="assets-heading"><div><span class="panel-label">WATCHLIST</span><h3>Popular assets</h3></div><span class="panel-subtle">Sample data · not live prices</span></div><div class="table-scroll"><table><thead><tr><th>Asset</th><th>Demo price</th><th>24h trend</th><th>Virtual allocation</th><th></th></tr></thead><tbody id="assetRows"><tr><td><span class="asset-name"><i class="asset-icon btc">₿</i><span><b>Bitcoin</b><small>BTC</small></span></span></td><td>₦98,500,000</td><td><span class="trend up">+2.40%</span></td><td>₦1,029,000</td><td><button class="row-action" data-asset="Bitcoin">Details ↗</button></td></tr><tr><td><span class="asset-name"><i class="asset-icon eth">◆</i><span><b>Ethereum</b><small>ETH</small></span></span></td><td>₦3,650,000</td><td><span class="trend up">+1.18%</span></td><td>₦686,000</td><td><button class="row-action" data-asset="Ethereum">Details ↗</button></td></tr><tr><td><span class="asset-name"><i class="asset-icon sol">◎</i><span><b>Solana</b><small>SOL</small></span></span></td><td>₦245,000</td><td><span class="trend down">−0.72%</span></td><td>₦441,000</td><td><button class="row-action" data-asset="Solana">Details ↗</button></td></tr><tr><td><span class="asset-name"><i class="asset-icon ada">A</i><span><b>Cardano</b><small>ADA</small></span></span></td><td>₦1,180</td><td><span class="trend up">+0.54%</span></td><td>₦294,000</td><td><button class="row-action" data-asset="Cardano">Details ↗</button></td></tr></tbody></table></div></article>
     </section>
 
-    <section class="section-wrap staking-section" id="staking"><div class="staking-copy"><div class="eyebrow">UNDERSTAND THE OPPORTUNITY</div><h2>Staking, without<br>the <span>guesswork.</span></h2><p>Some proof-of-stake networks let token holders help support network operations by staking eligible assets. Rewards, lock-up periods, and risks vary by network and provider.</p><a class="text-link" href="#how-it-works">Explore the basics <span>→</span></a></div><div class="staking-cards"><article class="stake-card"><div class="stake-icon">⌁</div><h3>Learn the basics</h3><p>Understand validators, lock-up periods, fees, and reward variability before making decisions.</p><span class="card-tag">EDUCATION FIRST</span></article><article class="stake-card featured"><div class="stake-icon">✧</div><h3>Simulate a strategy</h3><p>Experiment with hypothetical allocations without connecting a wallet or risking real assets.</p><button class="button button-primary button-small" id="simulateButton">Try a simulation ↗</button></article></div></section>
+    <section class="market" id="markets">
+      <div class="container">
+        <h2 class="section-title">Explore the crypto market</h2>
 
-    <section class="section-wrap how-section" id="how-it-works"><div class="section-heading centered"><div class="eyebrow">A SIMPLE START</div><h2>Three steps. <span>More clarity.</span></h2><p>ELITE FX starts as an educational demo — no wallet connection or real deposits.</p></div><div class="steps-grid"><article class="step"><span class="step-number">01</span><div class="step-icon">⌕</div><h3>Explore</h3><p>Review crypto assets and learn the language of digital markets.</p></article><article class="step"><span class="step-number">02</span><div class="step-icon">▤</div><h3>Practice</h3><p>Use virtual balances to understand allocations and portfolio changes.</p></article><article class="step"><span class="step-number">03</span><div class="step-icon">◇</div><h3>Learn the risks</h3><p>Study volatility, staking risks, fees, and security before real-world decisions.</p></article></div></section>
+        <p class="section-description">
+          Learn about some of the best-known digital assets.
+          The assets below are examples, not live market prices.
+        </p>
 
-    <section class="cta-section section-wrap"><div class="cta-glow"></div><div><div class="eyebrow">YOUR JOURNEY STARTS HERE</div><h2>Be curious. Stay <span>in control.</span></h2><p>Build your crypto knowledge at your own pace, one informed step at a time.</p></div><a class="button button-primary" href="#dashboard">Return to demo <span>↑</span></a></section>
+        <div class="market-row">
+          <div>
+            <span class="coin-name">Bitcoin</span>
+            <span class="coin-symbol">BTC</span>
+          </div>
+          <strong>₿</strong>
+        </div>
+
+        <div class="market-row">
+          <div>
+            <span class="coin-name">Ethereum</span>
+            <span class="coin-symbol">ETH</span>
+          </div>
+          <strong>Ξ</strong>
+        </div>
+
+        <div class="market-row">
+          <div>
+            <span class="coin-name">Tether</span>
+            <span class="coin-symbol">USDT</span>
+          </div>
+          <strong>₮</strong>
+        </div>
+
+        <p class="market-note">
+          No live prices or investment transactions are provided
+          by this demonstration website.
+        </p>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">About ELITE FX</h2>
+
+        <p class="section-description">
+          ELITE FX is a digital finance website concept designed
+          to introduce visitors to cryptocurrency markets and
+          digital asset education.
+        </p>
+
+        <div class="notice">
+          <h3>Understand the risks</h3>
+
+          <p>
+            Cryptocurrency investments can lose value, including
+            the entire amount invested. Returns are not guaranteed.
+            This website does not currently accept deposits, manage
+            customer funds, or process withdrawals. Do not send
+            cryptocurrency to this demonstration website.
+          </p>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="footer"><a class="brand" href="#home"><span class="brand-mark">E</span><span>ELITE <b>FX</b><small>CRYPTO PLATFORM</small></span></a><p>Crypto knowledge starts with clarity.</p><div class="footer-links"><a href="#markets">Markets</a><a href="#staking">Staking</a><a href="#how-it-works">Learn</a></div><div class="risk-note"><strong>Risk notice:</strong> This website is a prototype for education and demonstration only. All balances, allocations, prices, and performance figures are illustrative and may be fictional. No real investments, wallet connections, deposits, trades, or payouts are supported. Crypto assets can be volatile and you may lose some or all of your money. This demo is not financial advice.</div><div class="copyright">© <span id="year"></span> ELITE FX. Demo concept.</div></footer>
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 ELITE FX. All rights reserved.</span>
+      <span>Digital assets involve risk. Always do your research.</span>
+    </div>
+  </footer>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="script.js"></script>
 </body>
 </html>
