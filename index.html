@@ -1200,10 +1200,8 @@ style="background:#080a0f;color:white;padding:25px 15px;font-family:Arial,sans-s
 
 <script>
 (function () {
-  const SUPABASE_URL = 
-    "https://cornznsfwothkkquqcyz.supabase.co";)
-  const SUPABASE_PUBLISHABLE_KEY = 
-    "sb_publishable_n_hSo4H-Kjt-nvUXJHxNdA_unZGSoSZ";)
+  const SUPABASE_URL = "https://cornznsfwothkkquqcyz.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_n_hSo4H-Kjt-nvUXJHxNdA_unZGSoSZ";
 
   const status = document.getElementById("elite-auth-status");
   const emailInput = document.getElementById("elite-auth-email");
@@ -1221,10 +1219,11 @@ style="background:#080a0f;color:white;padding:25px 15px;font-family:Arial,sans-s
 
   if (
   SUPABASE_URL.includes("PASTE_YOUR_PROJECT_URL_HERE") ||
-  SUPABASE_PUBLISHABLE_KEY.includes("PASTE_YOUR_PUBLISHABLE_KEY_HERE") {
-status.textContent = "Setup required: add your Supabase Project URL and publishable key in the code.";
-return;
-}
+  SUPABASE_PUBLISHABLE_KEY.includes("PASTE_YOUR_PUBLISHABLE_KEY_HERE")
+) {
+  status.textContent = "Setup required: add your Supabase Project URL and publishable key in the code.";
+  return;
+  }
 
   const client = window.supabase.createClient(
     SUPABASE_URL,
