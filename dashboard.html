@@ -83,4 +83,81 @@ No real money or cryptocurrency is held here.
 
 <footer>© 2026 ELITE FX · Demonstration Platform</footer>
 </body>
-  </html>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function () {
+  const SUPABASE_URL =
+    "https://cornznsfwothkkquqcyz.supabase.co";
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_n_hSo4H-Kjt-nvUXJHxNdA_unZGSoSZ";
+
+  const client = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+  const main = document.querySelector("main");
+  const account = document.createElement("section");
+
+  account.className = "card";
+  account.innerHTML = `
+    <h2>My Account</h2>
+    <p id="account-status">Checking your login...</p>
+    <div id="account-details" hidden>
+      <p id="account-name"></p>
+      <p id="account-email"></p>
+      <button id="account-logout" type="button">
+        Log Out
+      </button>
+    </div>
+  `;
+
+  main.prepend(account);
+
+  async function checkAccount() {
+    const status = document.getElementById("account-status");
+    const details = document.getElementById("account-details");
+
+    const { data, error } = await client.auth.getSession();
+
+    if (error || !data.session) {
+      status.textContent =
+        "Please sign in through the main ELITE FX website first.";
+      const link = document.createElement("a");
+      link.href = "index.html";
+      link.textContent = "Go to Login";
+      link.style.color = "#e6bd43";
+      status.appendChild(document.createElement("br"));
+      status.appendChild(link);
+      return;
+    }
+
+    const user = data.session.user;
+    const name = user.user_metadata?.display_name;
+
+    status.textContent = "You are signed in.";
+    document.getElementById("account-name").textContent =
+      "Name: " + (name || "Not provided");
+    document.getElementById("account-email").textContent =
+      "Email: " + user.email;
+
+    details.hidden = false;
+  }
+
+  document.getElementById("account-logout")
+    .addEventListener("click", async function () {
+      const { error } = await client.auth.signOut();
+
+      if (error) {
+        alert("Could not log out. Please try again.");
+        return;
+      }
+
+      window.location.href = "index.html";
+    });
+
+  checkAccount();
+})();
+  </script>
+</html>
