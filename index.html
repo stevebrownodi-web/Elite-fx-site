@@ -1,437 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>ELITE FX | Digital Asset Platform</title>
-
-  <meta name="description"
-        content="Explore digital assets with ELITE FX. Learn about cryptocurrency markets, digital asset strategies, and investment risks.">
-
-  <style>
-    :root {
-      --gold: #f5c451;
-      --gold-light: #ffe6a0;
-      --bg: #080a0f;
-      --card: #121620;
-      --text: #f6f7fb;
-      --muted: #a4adbd;
-      --border: #292f3b;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(1100px, 90%);
-      margin: auto;
-    }
-
-    header {
-      border-bottom: 1px solid var(--border);
-      background: #0b0d13;
-    }
-
-    nav {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-      padding: 15px 0;
-    }
-
-    .logo {
-      font-size: 23px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      color: var(--gold);
-    }
-
-    .logo span {
-      color: white;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .nav-links a:hover {
-      color: var(--gold);
-    }
-
-    .hero {
-      padding: 85px 0 75px;
-      background:
-        radial-gradient(ellipse at top right,
-        #342713 0%, #11121a 35%, #080a0f 75%);
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 7px 13px;
-      border: 1px solid #665225;
-      border-radius: 30px;
-      color: var(--gold-light);
-      background: #19150d;
-      font-size: 12px;
-      margin-bottom: 22px;
-    }
-
-    h1 {
-      max-width: 760px;
-      font-size: clamp(36px, 7vw, 66px);
-      line-height: 1.12;
-      margin-bottom: 23px;
-      letter-spacing: -1.5px;
-    }
-
-    h1 span {
-      color: var(--gold);
-    }
-
-    .hero p {
-      color: var(--muted);
-      max-width: 620px;
-      font-size: 17px;
-      margin-bottom: 30px;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 13px 23px;
-      border-radius: 7px;
-      font-weight: bold;
-      font-size: 14px;
-      text-align: center;
-    }
-
-    .btn-gold {
-      background: var(--gold);
-      color: #17120a;
-    }
-
-    .btn-gold:hover {
-      background: var(--gold-light);
-    }
-
-    .btn-outline {
-      border: 1px solid var(--border);
-      color: white;
-    }
-
-    section {
-      padding: 65px 0;
-    }
-
-    .section-title {
-      font-size: clamp(25px, 4vw, 36px);
-      margin-bottom: 12px;
-    }
-
-    .section-description {
-      color: var(--muted);
-      max-width: 650px;
-      margin-bottom: 32px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      padding: 24px;
-    }
-
-    .card-icon {
-      font-size: 28px;
-      margin-bottom: 12px;
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
-
-    .card p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .market {
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: #0d1017;
-    }
-
-    .market-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      padding: 17px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .coin-name {
-      font-weight: bold;
-    }
-
-    .coin-symbol {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .market-note {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 20px;
-    }
-
-    .notice {
-      border: 1px solid #665225;
-      background: #17140e;
-      padding: 22px;
-      border-radius: 10px;
-    }
-
-    .notice h3 {
-      color: var(--gold);
-      margin-bottom: 8px;
-    }
-
-    .notice p {
-      color: #d1d3da;
-      font-size: 14px;
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 30px 0;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .footer-inner {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    @media (max-width: 700px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding: 60px 0;
-      }
-
-      .nav-links {
-        gap: 13px;
-      }
-
-      .market-row {
-        font-size: 14px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELITE FX | Crypto Dashboard</title>
+<style>
+:root {
+  --gold: #f4c44e;
+  --bg: #080a0f;
+  --panel: #131720;
+  --border: #292e39;
+  --text: #f5f6fa;
+  --muted: #a5adbc;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+header {
+  padding: 20px;
+  background: #10131a;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.logo { font-size: 23px; font-weight: 900; color: var(--gold); }
+.logo span { color: white; }
+button, .button {
+  border: 0;
+  border-radius: 7px;
+  padding: 12px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: var(--gold);
+  color: #17130a;
+}
+button.secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: white;
+}
+nav {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding: 16px 5%;
+  background: #0e1118;
+}
+nav a { color: var(--muted); text-decoration: none; font-size: 14px; }
+nav a:hover { color: var(--gold); }
+.container { width: 90%; max-width: 1100px; margin: auto; }
+.hero { padding: 35px 0 20px; }
+.demo {
+  display: inline-block;
+  padding: 7px 10px;
+  background: #332810;
+  color: var(--gold);
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+h1 { font-size: clamp(27px, 5vw, 40px); margin-bottom: 8px; }
+p { color: var(--muted); line-height: 1.6; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+  margin: 22px 0;
+}
+.card {
+  padding: 21px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  min-width: 0;
+}
+.label { color: var(--muted); font-size: 13px; }
+.amount { font-size: 27px; font-weight: bold; margin: 10px 0; overflow-wrap: anywhere; }
+.gold { color: var(--gold); }
+h2 { font-size: 23px; margin-top: 35px; }
+.coin { display: flex; align-items: center; gap: 12px; }
+.icon {
+  width: 42px; height: 42px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: #282313; color: var(--gold); font-weight: bold;
+}
+.coin-name { font-weight: bold; }
+.small { font-size: 12px; color: var(--muted); }
+.plan { display: flex; flex-direction: column; gap: 12px; }
+.plan button { margin-top: 8px; }
+.notice {
+  border: 1px solid #5c4920;
+  background: #19160f;
+  padding: 17px;
+  border-radius: 10px;
+  margin: 25px 0;
+  font-size: 13px;
+  color: #e4d8b9;
+  line-height: 1.6;
+}
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { text-align: left; padding: 13px 7px; border-bottom: 1px solid var(--border); }
+th { color: var(--muted); }
+footer {
+  border-top: 1px solid var(--border);
+  padding: 25px 0;
+  margin-top: 40px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.hidden { display: none; }
+input {
+  width: 100%;
+  padding: 13px;
+  margin: 8px 0 15px;
+  background: #090c12;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: white;
+}
+@media(max-width: 480px) {
+  header { padding: 16px; }
+  .container { width: 92%; }
+  th, td { padding: 11px 4px; }
+}
+</style>
 </head>
-
 <body>
 
-  <header>
-    <div class="container">
-      <nav>
-        <a class="logo" href="#home">ELITE <span>FX</span></a>
+<header>
+  <div class="logo">ELITE <span>FX</span></div>
+  <button class="secondary" onclick="showNotice()">Account</button>
+</header>
 
-        <div class="nav-links">
-          <a href="#home">Home</a>
-          <a href="#markets">Markets</a>
-          <a href="#features">Features</a>
-          <a href="#about">About</a>
-        </div>
-      </nav>
-    </div>
-  </header>
+<nav>
+  <a href="#dashboard">Dashboard</a>
+  <a href="#markets">Cryptocurrencies</a>
+  <a href="#plans">Plans</a>
+  <a href="#history">History</a>
+</nav>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="container">
-        <div class="badge">DIGITAL ASSETS • MARKET EDUCATION</div>
-
-        <h1>
-          Explore the future of
-          <span>digital finance.</span>
-        </h1>
-
-        <p>
-          Welcome to ELITE FX. Explore cryptocurrency markets,
-          understand digital assets, and learn about responsible
-          approaches to investing in a changing financial world.
-        </p>
-
-        <div class="buttons">
-          <a class="btn btn-gold" href="#markets">
-            Explore Markets
-          </a>
-
-          <a class="btn btn-outline" href="#about">
-            Learn More
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section id="features">
-      <div class="container">
-        <h2 class="section-title">A smarter way to explore crypto</h2>
-
-        <p class="section-description">
-          Learn the basics, understand the risks, and explore
-          digital asset opportunities before making financial decisions.
-        </p>
-
-        <div class="grid">
-          <article class="card">
-            <div class="card-icon">₿</div>
-            <h3>Digital Assets</h3>
-            <p>
-              Discover cryptocurrencies and learn how digital
-              asset markets work.
-            </p>
-          </article>
-
-          <article class="card">
-            <div class="card-icon">📊</div>
-            <h3>Market Insights</h3>
-            <p>
-              Explore market information and learn about price
-              movements, volatility, and risk.
-            </p>
-          </article>
-
-          <article class="card">
-            <div class="card-icon">🔐</div>
-            <h3>Security Awareness</h3>
-            <p>
-              Understand wallet security, private keys,
-              scams, and responsible asset management.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="market" id="markets">
-      <div class="container">
-        <h2 class="section-title">Explore the crypto market</h2>
-
-        <p class="section-description">
-          Learn about some of the best-known digital assets.
-          The assets below are examples, not live market prices.
-        </p>
-
-        <div class="market-row">
-          <div>
-            <span class="coin-name">Bitcoin</span>
-            <span class="coin-symbol">BTC</span>
-          </div>
-          <strong>₿</strong>
-        </div>
-
-        <div class="market-row">
-          <div>
-            <span class="coin-name">Ethereum</span>
-            <span class="coin-symbol">ETH</span>
-          </div>
-          <strong>Ξ</strong>
-        </div>
-
-        <div class="market-row">
-          <div>
-            <span class="coin-name">Tether</span>
-            <span class="coin-symbol">USDT</span>
-          </div>
-          <strong>₮</strong>
-        </div>
-
-        <p class="market-note">
-          No live prices or investment transactions are provided
-          by this demonstration website.
-        </p>
-      </div>
-    </section>
-
-    <section id="about">
-      <div class="container">
-        <h2 class="section-title">About ELITE FX</h2>
-
-        <p class="section-description">
-          ELITE FX is a digital finance website concept designed
-          to introduce visitors to cryptocurrency markets and
-          digital asset education.
-        </p>
-
-        <div class="notice">
-          <h3>Understand the risks</h3>
-
-          <p>
-            Cryptocurrency investments can lose value, including
-            the entire amount invested. Returns are not guaranteed.
-            This website does not currently accept deposits, manage
-            customer funds, or process withdrawals. Do not send
-            cryptocurrency to this demonstration website.
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <span>© 2026 ELITE FX. All rights reserved.</span>
-      <span>Digital assets involve risk. Always do your research.</span>
-    </div>
-  </footer>
-
-</body>
-</html>
+<main class="container
