@@ -148,3 +148,151 @@ input {
 </nav>
 
 <main class="container
+  <section class="hero" id="dashboard">
+    <span class="demo">DEMO VERSION</span>
+    <h1>Welcome to <span class="gold">ELITE FX</span></h1>
+    <p>Explore cryptocurrency assets with your demo dashboard.</p>
+  </section>
+
+  <div class="grid">
+    <div class="card">
+      <div class="label">Demo Portfolio Balance</div>
+      <div class="amount">$1,000.00</div>
+      <p>Simulated funds only</p>
+    </div>
+
+    <div class="card">
+      <div class="label">Demo Investments</div>
+      <div class="amount">$0.00</div>
+      <p>No real investments</p>
+    </div>
+
+    <div class="card">
+      <div class="label">Demo Earnings</div>
+      <div class="amount gold">$0.00</div>
+      <p>No real earnings</p>
+    </div>
+  </div>
+
+  <section id="markets">
+    <h2>Cryptocurrency Markets</h2>
+    <div class="grid">
+      <div class="card"><h3>₿ Bitcoin</h3><p>BTC</p></div>
+      <div class="card"><h3>Ξ Ethereum</h3><p>ETH</p></div>
+      <div class="card"><h3>₮ Tether</h3><p>USDT</p></div>
+      <div class="card"><h3>BNB</h3><p>BNB</p></div>
+      <div class="card"><h3>USD Coin</h3><p>USDC</p></div>
+    </div>
+  </section>
+
+  <section id="plans">
+    <h2>Investment Plans</h2>
+    <p>Explore these demonstration plans. No real money is accepted.</p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Starter</h3>
+        <p>Learn about cryptocurrency investing.</p>
+        <button onclick="demoMessage()">Explore Plan</button>
+      </div>
+
+      <div class="card">
+        <h3>Growth</h3>
+        <p>Learn about diversification and risk.</p>
+        <button onclick="demoMessage()">Explore Plan</button>
+      </div>
+
+      <div class="card">
+        <h3>Advanced</h3>
+        <p>Explore digital asset management.</p>
+        <button onclick="demoMessage()">Explore Plan</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="history">
+    <h2>Transaction History</h2>
+    <div class="card">
+      <p id="historyText">No demo transactions yet.</p>
+      <button onclick="addTransaction()">Add Demo Transaction</button>
+    </div>
+  </section>
+
+  <div class="notice">
+    <strong>DEMO ONLY:</strong> This website is a demonstration.
+    It does not accept deposits or process real investments or withdrawals.
+    Cryptocurrency investments involve risk, and returns are not guaranteed.
+  </div>
+
+</main>
+
+<footer>
+  <div class="container">
+    © 2026 ELITE FX | Cryptocurrency demonstration platform
+  </div>
+</footer>
+
+<style>
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+}
+.card {
+  background: #131720;
+  border: 1px solid #292e39;
+  border-radius: 12px;
+  padding: 20px;
+  overflow-wrap: anywhere;
+}
+.label { color: #a5adbc; }
+.amount { font-size: 26px; font-weight: bold; margin: 12px 0; }
+.gold { color: #f4c44e; }
+h1, h2 { color: #f5f6fa; }
+h2 { margin-top: 35px; }
+p { color: #a5adbc; line-height: 1.6; }
+.demo {
+  display: inline-block;
+  color: #f4c44e;
+  background: #332810;
+  padding: 7px;
+  border-radius: 5px;
+}
+.notice {
+  background: #19160f;
+  border: 1px solid #5c4920;
+  border-radius: 10px;
+  padding: 18px;
+  margin: 25px 0;
+  color: #e4d8b9;
+  line-height: 1.6;
+}
+footer {
+  padding: 25px 0;
+  color: #a5adbc;
+  border-top: 1px solid #292e39;
+}
+button {
+  background: #f4c44e;
+  color: #17130a;
+  border: 0;
+  border-radius: 7px;
+  padding: 12px;
+  font-weight: bold;
+}
+</style>
+
+<script>
+function demoMessage() {
+  alert("ELITE FX demo: Real investments are not active yet.");
+}
+
+function addTransaction() {
+  document.getElementById("historyText").textContent =
+    "Demo activity | $0.00 | Simulation only";
+}
+</script>
+
+</body>
+      </html>
