@@ -122,8 +122,9 @@ No real money or cryptocurrency is held here.
     const { data, error } = await client.auth.getSession();
 
     if (error || !data.session) {
-      status.textContent =
-        "Please sign in through the main ELITE FX website first.";
+  window.location.replace("index.html");
+  return;
+      }
       const link = document.createElement("a");
       link.href = "index.html";
       link.textContent = "Go to Login";
