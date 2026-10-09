@@ -1336,7 +1336,8 @@ style="background:#080a0f;color:white;padding:25px 15px;font-family:Arial,sans-s
   client.auth.onAuthStateChange(function (event, session) {
     if (session && session.user) {
       signedInPanel.hidden = false;
-      signedInEmail.textContent = "Signed in as: " + session.user.email;
+      const displayName = session.user.user_metadata?.display_name;
+signedInEmail.textContent = "Welcome, " + (displayName || session.user.email) + "!";
       showMessage("Account connected successfully.");
     } else {
       signedInPanel.hidden = true;
@@ -1349,8 +1350,8 @@ style="background:#080a0f;color:white;padding:25px 15px;font-family:Arial,sans-s
       showMessage("Could not check your login status. Please refresh the page.");
     } else if (data.session) {
       signedInPanel.hidden = false;
-      signedInEmail.textContent =
-        "Signed in as: " + data.session.user.email;
+      const displayName = data.session.user.user_metadata?.display_name;
+signedInEmail.textContent = "Welcome, " + (displayName || data.session.user.email) + "!";
       showMessage("You are already signed in.");
     } else {
       showMessage("Ready. Create an account or log in.");
