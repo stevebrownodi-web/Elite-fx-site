@@ -293,6 +293,56 @@ function addTransaction() {
     "Demo activity | $0.00 | Simulation only";
 }
 </script>
+<div id="auth" style="max-width:450px;margin:30px auto;padding:20px;background:#131720;color:white;border:1px solid #f4c44e;border-radius:12px;font-family:Arial,sans-serif">
+  <h2 style="color:#f4c44e">ELITE FX Account</h2>
+  <p>Create a demo account or switch to login.</p>
 
+  <button onclick="showRegister()">Create Account</button>
+  <button onclick="showLogin()">Login</button>
+
+  <form id="register" style="display:none;margin-top:20px" onsubmit="return demoRegister(event)">
+    <h3>Demo Registration</h3>
+    <label>Display name</label>
+    <input id="demoName" required placeholder="Choose a display name" style="display:block;width:95%;padding:10px;margin:8px 0">
+    <p><strong>Demo only:</strong> Do not enter a real password or sensitive information.</p>
+    <button type="submit">Preview Account</button>
+  </form>
+
+  <form id="login" style="display:none;margin-top:20px" onsubmit="return demoLogin(event)">
+    <h3>Demo Login</h3>
+    <label>Display name</label>
+    <input id="loginName" required placeholder="Enter your display name" style="display:block;width:95%;padding:10px;margin:8px 0">
+    <button type="submit">Continue Demo</button>
+  </form>
+
+  <p id="authMessage" aria-live="polite"></p>
+</div>
+
+<script>
+function showRegister() {
+  document.getElementById("register").style.display = "block";
+  document.getElementById("login").style.display = "none";
+  document.getElementById("authMessage").textContent = "";
+}
+function showLogin() {
+  document.getElementById("login").style.display = "block";
+  document.getElementById("register").style.display = "none";
+  document.getElementById("authMessage").textContent = "";
+}
+function demoRegister(event) {
+  event.preventDefault();
+  const name = document.getElementById("demoName").value.trim();
+  document.getElementById("authMessage").textContent =
+    "Demo preview ready for " + name + ". No real account was created.";
+  return false;
+}
+function demoLogin(event) {
+  event.preventDefault();
+  const name = document.getElementById("loginName").value.trim();
+  document.getElementById("authMessage").textContent =
+    "Welcome, " + name + ". This is a demo; real login is not active.";
+  return false;
+}
+    </script>
 </body>
       </html>
