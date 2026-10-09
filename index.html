@@ -1212,10 +1212,11 @@ style="background:#080a0f;color:white;padding:25px 15px;font-family:Arial,sans-s
   const SUPABASE_URL = "https://cornznsfwothkkquqcyz.supabase.co";
   const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_n_hSo4H-Kjt-nvUXJHxNdA_unZGSoSZ";
 
-   status = document.getElementById("elite-auth-status");
+   const status = document.getElementById("elite-auth-status");
   const emailInput = document.getElementById("elite-auth-email");
+  const nameInput = document.getElementById("elite-auth-name");
   const passwordInput = document.getElementById("elite-auth-password");
-  const signedInPanconstel = document.getElementById("elite-signed-in-panel");
+  const signedInPanel = document.getElementById("elite-signed-in-panel");
   const signedInEmail = document.getElementById("elite-signed-in-email");
   const signupButton = document.getElementById("elite-signup-button");
   const loginButton = document.getElementById("elite-login-button");
@@ -1257,7 +1258,7 @@ style="background:#080a0f;color:white;padding:25px 15px;font-family:Arial,sans-s
       return null;
     }
 
-    return { email, password };
+    return { name: nameInput.value.trim(), email, password };
   }
 
   signupButton.addEventListener("click", async function () {
@@ -1272,9 +1273,12 @@ style="background:#080a0f;color:white;padding:25px 15px;font-family:Arial,sans-s
         email: credentials.email,
         password: credentials.password,
         options: {
-          emailRedirectTo: window.location.origin +
-            window.location.pathname
-        }
+  data: {
+    display_name: credentials.name
+  },
+  emailRedirectTo: window.location.origin +
+    window.location.pathname
+}
       });
 
       if (error) throw error;
