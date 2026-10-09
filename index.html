@@ -1123,5 +1123,228 @@ style="background:#080a0f;color:white;padding:25px 15px;font-family:Arial,sans-s
 })();
 </script>
 <!-- END ELITE FX INTERACTIVE DEMO PORTFOLIO -->
+<!-- ELITE FX SUPABASE ACCOUNT SYSTEM -->
+<section id="elite-real-account"
+style="background:#080a0f;color:white;padding:25px 15px;font-family:Arial,sans-serif;">
+
+  <div style="max-width:600px;margin:auto;background:#12151d;border:1px solid #c9a227;border-radius:14px;padding:22px;">
+
+    <h2 style="color:#e6bd45;">ELITE FX Account</h2>
+
+    <p style="color:#bbb;font-size:14px;">
+      Create an account or log in using your email address.
+    </p>
+
+    <label for="elite-auth-email">Email address</label>
+
+    <input
+      id="elite-auth-email"
+      type="email"
+      autocomplete="email"
+      required
+      placeholder="you@example.com"
+      style="display:block;box-sizing:border-box;width:100%;padding:13px;margin:8px 0 18px;background:#080a0f;color:white;border:1px solid #444;border-radius:7px;">
+
+    <label for="elite-auth-password">Password</label>
+
+    <input
+      id="elite-auth-password"
+      type="password"
+      autocomplete="current-password"
+      minlength="8"
+      required
+      placeholder="At least 8 characters"
+      style="display:block;box-sizing:border-box;width:100%;padding:13px;margin:8px 0 18px;background:#080a0f;color:white;border:1px solid #444;border-radius:7px;">
+
+    <button
+      id="elite-signup-button"
+      type="button"
+      style="width:100%;padding:13px;background:#e6bd45;color:#111;font-weight:bold;border:0;border-radius:7px;margin-bottom:10px;">
+      Create Account
+    </button>
+
+    <button
+      id="elite-login-button"
+      type="button"
+      style="width:100%;padding:13px;background:#292d35;color:white;border:1px solid #555;border-radius:7px;">
+      Log In
+    </button>
+
+    <div id="elite-auth-status"
+      role="status"
+      aria-live="polite"
+      style="margin-top:18px;color:#e6bd45;overflow-wrap:anywhere;">
+      Connecting to account service...
+    </div>
+
+    <div id="elite-signed-in-panel" hidden style="margin-top:15px;">
+      <p id="elite-signed-in-email" style="overflow-wrap:anywhere;"></p>
+
+      <button
+        id="elite-logout-button"
+        type="button"
+        style="padding:12px 18px;background:#e6bd45;color:#111;border:0;border-radius:7px;font-weight:bold;">
+        Log Out
+      </button>
+    </div>
+
+    <p style="color:#999;font-size:11px;line-height:1.6;margin-top:20px;">
+      ELITE FX account authentication is separate from the demonstration
+      wallet. No deposits, withdrawals, or investment returns are provided.
+    </p>
+
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+(function () {
+  const SUPABASE_URL = "PASTE_YOUR_PROJECT_URL_HERE";
+  const SUPABASE_PUBLISHABLE_KEY = "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+
+  const status = document.getElementById("elite-auth-status");
+  const emailInput = document.getElementById("elite-auth-email");
+  const passwordInput = document.getElementById("elite-auth-password");
+  const signedInPanel = document.getElementById("elite-signed-in-panel");
+  const signedInEmail = document.getElementById("elite-signed-in-email");
+  const signupButton = document.getElementById("elite-signup-button");
+  const loginButton = document.getElementById("elite-login-button");
+  const logoutButton = document.getElementById("elite-logout-button");
+
+  if (!window.supabase) {
+    status.textContent = "Account service could not load. Check your internet connection.";
+    return;
+  }
+
+  if (
+    SUPABASE_URL === https://cornznsfwothkkquqcyz.supabase.co/rest/v1/ ||
+    SUPABASE_PUBLISHABLE_KEY === sb_publishable_n_hSo4H-Kjt-nvUXJHxNdA_unZGSoSZ
+  ) {
+    status.textContent = "Setup required: add your Supabase Project URL and publishable key in the code.";
+    return;
+  }
+
+  const client = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+  function showMessage(message) {
+    status.textContent = message;
+  }
+
+  function getCredentials() {
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    if (!email || !emailInput.checkValidity()) {
+      showMessage("Please enter a valid email address.");
+      return null;
+    }
+
+    if (password.length < 8) {
+      showMessage("Please enter a password with at least 8 characters.");
+      return null;
+    }
+
+    return { email, password };
+  }
+
+  signupButton.addEventListener("click", async function () {
+    const credentials = getCredentials();
+    if (!credentials) return;
+
+    signupButton.disabled = true;
+    showMessage("Creating your account...");
+
+    try {
+      const { data, error } = await client.auth.signUp({
+        email: credentials.email,
+        password: credentials.password,
+        options: {
+          emailRedirectTo: window.location.origin +
+            window.location.pathname
+        }
+      });
+
+      if (error) throw error;
+
+      if (data.session) {
+        showMessage("Account created successfully.");
+      } else {
+        showMessage("Check your email for a confirmation link to finish registration.");
+      }
+    } catch (error) {
+      showMessage(error.message || "Account creation failed.");
+    } finally {
+      signupButton.disabled = false;
+    }
+  });
+
+  loginButton.addEventListener("click", async function () {
+    const credentials = getCredentials();
+    if (!credentials) return;
+
+    loginButton.disabled = true;
+    showMessage("Signing in...");
+
+    try {
+      const { error } = await client.auth.signInWithPassword({
+        email: credentials.email,
+        password: credentials.password
+      });
+
+      if (error) throw error;
+
+      showMessage("You are signed in.");
+    } catch (error) {
+      showMessage(error.message || "Login failed.");
+    } finally {
+      loginButton.disabled = false;
+    }
+  });
+
+  logoutButton.addEventListener("click", async function () {
+    logoutButton.disabled = true;
+
+    try {
+      const { error } = await client.auth.signOut();
+      if (error) throw error;
+
+      showMessage("You have logged out.");
+    } catch (error) {
+      showMessage(error.message || "Logout failed.");
+    } finally {
+      logoutButton.disabled = false;
+    }
+  });
+
+  client.auth.onAuthStateChange(function (event, session) {
+    if (session && session.user) {
+      signedInPanel.hidden = false;
+      signedInEmail.textContent = "Signed in as: " + session.user.email;
+      showMessage("Account connected successfully.");
+    } else {
+      signedInPanel.hidden = true;
+      signedInEmail.textContent = "";
+    }
+  });
+
+  client.auth.getSession().then(function ({ data, error }) {
+    if (error) {
+      showMessage("Could not check your login status. Please refresh the page.");
+    } else if (data.session) {
+      signedInPanel.hidden = false;
+      signedInEmail.textContent =
+        "Signed in as: " + data.session.user.email;
+      showMessage("You are already signed in.");
+    } else {
+      showMessage("Ready. Create an account or log in.");
+    }
+  });
+})();
+</script>
+<!-- END ELITE FX SUPABASE ACCOUNT SYSTEM -->
 </body>
       </html>
